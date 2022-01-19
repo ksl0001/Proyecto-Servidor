@@ -5,8 +5,8 @@ CREATE DATABASE myshelf;
 USE myshelf;
 
 CREATE TABLE usuario( -- TODO: índices con usuario para con listas?
-    email VARCHAR(35), -- max 15 caracteres? controlar en cliente
-    alias VARCHAR(15), -- controlar hash caracteres password
+    email VARCHAR(35) UNIQUE, -- max 15 caracteres? controlar en cliente
+    alias VARCHAR(15) UNIQUE, -- controlar hash caracteres password
     password VARCHAR(256) NOT NULL,
     nombre VARCHAR(20), -- nom, ape controlar en cliente
     apellidos VARCHAR(30),
