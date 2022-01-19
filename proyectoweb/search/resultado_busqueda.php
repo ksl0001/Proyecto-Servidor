@@ -28,7 +28,7 @@
         if($resultado){
             $isbn = $resultado['isbn'];
             $portada = $resultado['portada'];
-            echo "<a href='http://192.168.1.144/proyectoweb/libro/show/libro.php?isbn=$isbn'>$resultado[titulo]</a>";
+            echo "<a href='http://localhost/myshelf-backend/proyectoweb/libro/show/libro.php?isbn=$isbn'>$resultado[titulo]</a>";
             // Usad esto para copiar y pegar
             echo '<img class="imagenes" src="data:image/jpeg;base64,'.base64_encode( $portada ).' "/>';
         }else{
