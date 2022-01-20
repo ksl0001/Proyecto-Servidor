@@ -5,10 +5,10 @@ CREATE DATABASE myshelf;
 USE myshelf;
 
 CREATE TABLE usuario( -- TODO: índices con usuario para con listas?
-    email VARCHAR(35) UNIQUE, -- max 15 caracteres? controlar en cliente
-    alias VARCHAR(15) UNIQUE, -- controlar hash caracteres password
-    password VARCHAR(256) NOT NULL,
-    nombre VARCHAR(20), -- nom, ape controlar en cliente
+    email VARCHAR(35) UNIQUE CHECK (email <> ''), -- max 15 caracteres? controlar en cliente
+    alias VARCHAR(15) UNIQUE CHECK (alias <> ''), -- controlar hash caracteres password
+    password VARCHAR(256) NOT NULL CHECK (password <> ''),
+    nombre VARCHAR(20) NOT NULL CHECK (password <> ''), -- nom, ape controlar en cliente
     apellidos VARCHAR(30),
     PRIMARY KEY (email,alias)
 );
@@ -43,8 +43,8 @@ CREATE TABLE editorial(
 );
 
 CREATE TABLE libro(
-    isbn VARCHAR(13),
-    titulo VARCHAR(30) NOT NULL,
+    isbn VARCHAR(13) UNIQUE CHECK (isbn <> ''),
+    titulo VARCHAR(30) NOT NULL UNIQUE CHECK (titulo <> ''),
     autor VARCHAR(50),
     portada LONGBLOB,
     descripcion VARCHAR(500),
@@ -68,7 +68,7 @@ CREATE TABLE libro_editorial(
 CREATE TABLE libro_genero(
   cod int(11) AUTO_INCREMENT,
   cod_genero VARCHAR(10) NOT NULL,
-  isbn VARCHAR(13) NOT NULL,
+  isbn VARCHAR(13) NOT NULL CHECK (isbn <> ''),
   PRIMARY KEY (cod),
   FOREIGN KEY (cod_genero) 
     REFERENCES genero(cod_genero) ON DELETE CASCADE,
@@ -79,9 +79,9 @@ CREATE TABLE libro_genero(
 /* Tabla que contiene las reseñas de todos los usuarios en un determinado libro */
 CREATE TABLE reseña(
     id_reseña VARCHAR(20),
-    isbn VARCHAR(13) NOT NULL,
-    email VARCHAR(35) NOT NULL,
-    alias_user VARCHAR(15) NOT NULL,
+    isbn VARCHAR(13) NOT NULL CHECK (isbn <> ''),
+    email VARCHAR(35) NOT NULL CHECK (email <> ''),
+    alias_user VARCHAR(15) NOT NULL CHECK (alias_user <> ''),
     puntuacion DECIMAL(10.2),
     opinion VARCHAR(600),
     fecha DATE,
@@ -98,8 +98,8 @@ CREATE TABLE reseña(
 );
 /* Tabla que contiene tanto el código de una tienda, como en nombre que la identifica*/
 CREATE TABLE tienda(
-    cod_tienda VARCHAR(20),
-    nombre VARCHAR(20),
+    cod_tienda VARCHAR(20) CHECK (cod_tienda <> ''),
+    nombre VARCHAR(20) CHECK (nombre <> ''),
     PRIMARY KEY (cod_tienda, nombre)
 );
 /* Tabla que relaciona las tiendas con los libros, y contiene los enlaces para cada ISBN-Tienda*/
@@ -117,8 +117,8 @@ CREATE TABLE compra_tienda(
 
 /* Tabla que relaciona cada lista con el usuario que la ha creado */
 CREATE TABLE lista_creada(
-    alias VARCHAR(15),
-    email VARCHAR(35),
+    alias VARCHAR(15) CHECK (alias <> ''),
+    email VARCHAR(35) CHECK (email <> ''),
     id_lista VARCHAR(20),
     PRIMARY KEY (alias,email,id_lista),
     FOREIGN KEY (id_lista)
@@ -128,7 +128,7 @@ CREATE TABLE lista_creada(
 /* Tabla que relaciona cada libro almacenado en una determinada lista */ 
 CREATE TABLE libro_almacenado(
     cod_almacenado INT AUTO_INCREMENT,
-    id_lista VARCHAR(20),
+    id_lista VARCHAR(20) CHECK (id_lista <> ''),
     isbn VARCHAR(13),
     fecha_adicion DATE,
     PRIMARY KEY(cod_almacenado),
