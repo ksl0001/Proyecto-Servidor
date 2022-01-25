@@ -1,6 +1,6 @@
 USE myshelf;
-INSERT INTO usuario VALUES("manu@gmail.com","manusito21","1234","Manuel","Vázquez Del Pino");
-INSERT INTO usuario VALUES("manu2@gmail.com","pepe","1234","Pepe","Casablanca");
+INSERT INTO usuario VALUES("manu@gmail.com","manusito21","1234","Manuel","Vázquez Del Pino", "Mi biografía");
+INSERT INTO usuario VALUES("manu2@gmail.com","pepe","1234","Pepe","Casablanca", null);
 
 /* Estos deberían ser creados PREVIAMENTE a que existan usuarios (que exista al menos 1) */
 

@@ -10,6 +10,7 @@ CREATE TABLE usuario( -- TODO: índices con usuario para con listas?
     password VARCHAR(256) NOT NULL CHECK (password <> ''),
     nombre VARCHAR(20) NOT NULL CHECK (password <> ''), -- nom, ape controlar en cliente
     apellidos VARCHAR(30),
+    biografia VARCHAR(650),
     PRIMARY KEY (email,alias)
 );
 

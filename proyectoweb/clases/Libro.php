@@ -20,7 +20,6 @@ class Libro{
     }
 
     public function obtenerLibros(){
-        // $conexion = new mysqli("localhost","root","","myshelf");
         $sqlQuery = "SELECT * FROM libro;";
         $resultado = $this->conexion->query($sqlQuery)->fetch_assoc();
         $this->conexion->close();
